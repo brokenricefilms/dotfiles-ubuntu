@@ -16,6 +16,10 @@ alias la="\ls -a"
 alias batcat="bat"
 alias ..="cd .."
 alias doc="cd ~/Documents"
+alias ins="sudo apt install"
+alias re="sudo apt remove"
+alias p="git push"
+alias s="git status --short --branch"
 
 function update() {
     cp ~/.bashrc ~/repos/brokenricefilms/dotfiles-ubuntu/
@@ -37,6 +41,12 @@ function gitAutoCommit() {
   git push
 }
 alias aa="gitAutoCommit"
+
+function gitAddAll() {
+    git add -A
+    git commit
+}
+alias a="gitAddAll"
 
 function fzfEditFile() {
   if [ -z "$1" ]; then
