@@ -1,18 +1,30 @@
-HISTCONTROL=ignoreboth
-shopt -s histappend
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux attach || tmux new-session && exit
+fi
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTCONTROL=ignoreboth
+HISTSIZE=
+HISTFILESIZE=
+shopt -s histappend
+shopt -s checkwinsize
 HISTSIZE=9999999999999
 HISTFILESIZE=9999999999999
+
+bind "set completion-ignore-case on"
+
+set -o vi
+stty time 0
+
+export PATH=$PATH:/home/master/go/bin
 
 alias d="aria2c -x 16 -s 16 --seed-time=0 $args"
 alias dow="cd ~/Downloads"
 alias reload="source ~/.bashrc;tmux source ~/.tmux.conf"
 alias fd="fdfind"
 alias q="exit"
-alias ls="ls -al"
-alias l="ls -al"
-alias la="\ls -a"
+alias ls="eza -al --icons=auto"
+alias l="eza -al --icons=auto"
+alias la="eza -a --icons=auto"
 alias batcat="bat"
 alias ..="cd .."
 alias doc="cd ~/Documents"
@@ -20,6 +32,9 @@ alias ins="sudo apt install"
 alias re="sudo apt remove"
 alias p="git push"
 alias s="git status --short --branch"
+alias v="nvim ."
+alias neofetch="\fastfetch -c archey"
+alias fastfetch="fastfetch -c archey"
 
 function update() {
     cp ~/.bashrc ~/repos/brokenricefilms/dotfiles-ubuntu/
@@ -45,6 +60,7 @@ alias aa="gitAutoCommit"
 function gitAddAll() {
     git add -A
     git commit
+    git push
 }
 alias a="gitAddAll"
 
