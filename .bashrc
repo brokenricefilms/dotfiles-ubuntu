@@ -35,6 +35,8 @@ alias s="git status --short --branch"
 alias v="nvim ."
 alias neofetch="\fastfetch -c archey"
 alias fastfetch="fastfetch -c archey"
+alias clear="clear -x"
+alias h="cat ~/.bash_history | fzf | bash"
 
 function update() {
     cp ~/.bashrc ~/repos/brokenricefilms/dotfiles-ubuntu/
